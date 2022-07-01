@@ -13,6 +13,8 @@ import (
 	"github.com/johannesboyne/gofakes3/backend/s3mem"
 )
 
+const version = "1"
+
 func main() {
 	ctx, cancel := signal.NotifyContext(
 		context.Background(),
