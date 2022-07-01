@@ -13,8 +13,6 @@ import (
 	"github.com/johannesboyne/gofakes3/backend/s3mem"
 )
 
-const version = "5"
-
 func main() {
 	ctx, cancel := signal.NotifyContext(
 		context.Background(),
@@ -22,11 +20,8 @@ func main() {
 		syscall.SIGTERM, os.Kill)
 
 	defer cancel()
+
 	logger := log.New(os.Stdout, "", 0)
-	// backend, err := s3afero.MultiBucket(afero.NewMemMapFs())
-	// if err != nil {
-	//	log.Fatal(err)
-	// }
 	backend := s3mem.New()
 	s3 := gofakes3.New(backend,
 		gofakes3.WithAutoBucket(true),
