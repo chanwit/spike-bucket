@@ -10,8 +10,7 @@ import (
 	"syscall"
 
 	"github.com/johannesboyne/gofakes3"
-	"github.com/johannesboyne/gofakes3/backend/s3afero"
-	"github.com/spf13/afero"
+	"github.com/johannesboyne/gofakes3/backend/s3mem"
 )
 
 func main() {
@@ -22,12 +21,13 @@ func main() {
 
 	defer cancel()
 	logger := log.New(os.Stdout, "", 0)
-	backend, err := s3afero.MultiBucket(afero.NewMemMapFs())
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	// backend, err := s3afero.MultiBucket(afero.NewMemMapFs())
+	// if err != nil {
+	//	log.Fatal(err)
+	// }
+	backend := s3mem.New()
 	s3 := gofakes3.New(backend,
+		gofakes3.WithAutoBucket(true),
 		gofakes3.WithLogger(gofakes3.StdLog(logger, gofakes3.LogErr, gofakes3.LogWarn, gofakes3.LogInfo)))
 
 	// create a listener with the desired port.
