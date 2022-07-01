@@ -28,7 +28,6 @@ func main() {
 	}
 
 	s3 := gofakes3.New(backend,
-		gofakes3.WithAutoBucket(true),
 		gofakes3.WithLogger(gofakes3.StdLog(logger, gofakes3.LogErr, gofakes3.LogWarn, gofakes3.LogInfo)))
 
 	// create a listener with the desired port.
