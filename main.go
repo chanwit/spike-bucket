@@ -13,7 +13,7 @@ import (
 	"github.com/johannesboyne/gofakes3/backend/s3mem"
 )
 
-const version = "1"
+const version = "2"
 
 func main() {
 	ctx, cancel := signal.NotifyContext(
@@ -30,7 +30,8 @@ func main() {
 	backend := s3mem.New()
 	s3 := gofakes3.New(backend,
 		gofakes3.WithAutoBucket(true),
-		gofakes3.WithLogger(gofakes3.StdLog(logger, gofakes3.LogErr, gofakes3.LogWarn, gofakes3.LogInfo)))
+		gofakes3.WithLogger(gofakes3.StdLog(logger,
+			gofakes3.LogErr, gofakes3.LogWarn, gofakes3.LogInfo, gofakes3.LogDebug)))
 
 	// create a listener with the desired port.
 	listener, err := net.Listen("tcp", ":9000")
