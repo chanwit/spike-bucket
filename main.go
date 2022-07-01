@@ -28,7 +28,7 @@ func main() {
 		gofakes3.WithLogger(gofakes3.StdLog(logger, gofakes3.LogErr, gofakes3.LogWarn, gofakes3.LogInfo)))
 
 	// create a listener with the desired port.
-	listener, err := net.Listen("tcp", "127.0.0.1:9000")
+	listener, err := net.Listen("tcp", ":9000")
 	if err != nil {
 		log.Fatal(err)
 	}
